@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    color: black;
+}
+
+header{
+    margin : 2%;
+}
+
+.navbar{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
