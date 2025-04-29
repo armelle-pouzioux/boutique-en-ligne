@@ -7,21 +7,18 @@ $email = $password = "";
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Trim whitespace from the email and password inputs
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
 
-    // Log in the user using the userController's login method
     $loggedInUser = $userController->login($email, $password);
 
     if ($loggedInUser) {
         session_start();
-        // Set session variables with user data
         $_SESSION["id"] = $loggedInUser["id"];
-        $_SESSION["username"] = $loggedInUser["username"];
+        $_SESSION["name"] = $loggedInUser["name"];
         $_SESSION["email"] = $loggedInUser["email"];
         $_SESSION["successMessage"] = "Bienvenue " . $_SESSION["username"] . " !";
-        header("Location: ../dashboard.php");
+        header("Location: ../index.php");
         exit();
     } else {
         $error = "Email ou mot de passe incorrect.";

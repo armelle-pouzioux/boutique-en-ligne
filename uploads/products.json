@@ -1,0 +1,36 @@
+[
+    {
+      "id": 1,
+      "nom": "Kit Classique Nude",
+      "description": "Set de 24 press-on nails couleur nude avec colle incluse.",
+      "categorie": "standard",
+      "prix": 19.99,
+      "image": "nude-kit.jpg",
+      "disponible": true
+    },
+    {
+      "id": 2,
+      "nom": "Press-on personnalisable",
+      "description": "Personnalisez votre propre set : forme, couleur, motif et taille.",
+      "categorie": "personnalisable",
+      "prix_base": 24.99,
+      "options_personnalisation": {
+        "forme": ["amande", "carré", "stiletto", "coffin"],
+        "longueur": ["court", "moyen", "long"],
+        "couleur": ["rouge", "rose", "noir", "blanc", "autre"],
+        "motif": ["french", "marbré", "paillettes", "sans motif"]
+      },
+      "image": "custom-kit.jpg",
+      "disponible": true
+    },
+    {
+      "id": 3,
+      "nom": "Carte Cadeau - 30€",
+      "description": "Offrez une carte cadeau digitale d’une valeur de 30€.",
+      "categorie": "carte cadeau",
+      "prix": 30.00,
+      "image": "gift-card.jpg",
+      "disponible": true
+    }
+  ]
+  
