@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             header("Location: ../index.php"); 
         }
-
+        
         exit();
     } else {
         $error = "Email ou mot de passe incorrect.";
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <main>
-    <?php if (isset($_SESSION["successMessage"])) : ?>
+    <?php if (isset($_SESSION["username"])) : ?>
         <p class="message-success"><?php echo $_SESSION["successMessage"] ; ?></p>
         <?php unset($_SESSION["successMessage"]); ?>
     <?php endif; ?>

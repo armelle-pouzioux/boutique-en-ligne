@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     logo.addEventListener('click', () => {
-        window.location.href = "/boutique-en-ligne/ind ex.php"; 
+        window.location.href = "/boutique-en-ligne/index.php"; 
     });
 
     burgerMenu.addEventListener('click', () => {

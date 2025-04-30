@@ -65,7 +65,7 @@ if (isset($_GET["action"]) && $_GET["action"] === "logout") {
                 <li><a href="index.php?page=cart&action=view">Panier</a></li>
                 <li><a href="#">Contact</a></li>
                 <?php if (isset($_SESSION['id'])): ?>
-                <li><a href="#" class="login-nav">Mon compte</a></li>
+                <li><a href="/boutique-en-ligne/views/user/edit_profile.php" class="login-nav">Mon compte</a></li>
                 <li><a href="?action=logout" class="login-nav">Se déconnecter</a></li>
                 <?php else: ?>
                 <li><a href="/boutique-en-ligne/views/user/login.php" class="login-nav">Se connecter</a></li>
@@ -76,7 +76,7 @@ if (isset($_GET["action"]) && $_GET["action"] === "logout") {
         <div class="user-menu hidden">
             <?php if (isset($_SESSION['id'])): ?>
                 <ul>
-                    <li><a href="index.php?page=user&action=profile">Mon compte</a></li>
+                    <li><a href="/boutique-en-ligne/views/user/edit_profile.php">Mon compte</a></li>
                     <li><a href="?action=logout">Se déconnecter</a></li>
                 </ul>
             <?php else: ?>
