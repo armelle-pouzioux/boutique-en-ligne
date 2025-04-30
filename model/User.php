@@ -8,7 +8,7 @@ class User extends Database
     }
 
     // register: Registers a new user in the database
-    public function register($name, $email, $password)
+    public function register($username, $email, $password)
     {
         $query = "SELECT email FROM users WHERE email = :email";
         $stmt = $this->getPdo()->prepare($query);
@@ -18,9 +18,9 @@ class User extends Database
         } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO users(name, email, password) VALUES (:name, :email, :password)";
+            $query = "INSERT INTO users(username, email, password) VALUES (:username, :email, :password)";
             $stmt = $this->getPdo()->prepare($query);
-            if ($stmt->execute([":name" => $name, ":email" => $email, ":password" => $hashedPassword])) {
+            if ($stmt->execute([":username" => $username, ":email" => $email, ":password" => $hashedPassword])) {
                 return true;
             } else {
                 $_SESSION["errorMessage"] = "Erreur lors de l'inscription.";

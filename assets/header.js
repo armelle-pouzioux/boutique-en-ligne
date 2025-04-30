@@ -6,14 +6,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-btn');
     const logo = document.querySelector('.logo');
+    const userIcon = document.querySelector('.user-icon');
+    const userMenu = document.querySelector('.user-menu');
+
 
     logo.addEventListener('click', () => {
-        window.location.href = "/boutique-en-ligne/index.php"; 
+        window.location.href = "/boutique-en-ligne/ind ex.php"; 
     });
 
     burgerMenu.addEventListener('click', () => {
         navMenu.classList.toggle('hidden');
         if (!navMenu.classList.contains('hidden')) {
+            searchContainer.classList.add('hidden'); 
+            userMenu.classList.add('hidden'); 
+        }
+    });
+
+    userIcon.addEventListener('click', () => {
+        userMenu.classList.toggle('hidden');
+        if (!userMenu.classList.contains('hidden')) {
             searchContainer.classList.add('hidden'); 
         }
     });
@@ -22,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         searchContainer.classList.toggle('hidden');
         if (!searchContainer.classList.contains('hidden')) {
             navMenu.classList.add('hidden');
+            userMenu.classList.add('hidden');
         }
     });
 

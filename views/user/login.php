@@ -13,12 +13,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loggedInUser = $userController->login($email, $password);
 
     if ($loggedInUser) {
-        session_start();
         $_SESSION["id"] = $loggedInUser["id"];
-        $_SESSION["name"] = $loggedInUser["name"];
+        $_SESSION["username"] = $loggedInUser["username"];
         $_SESSION["email"] = $loggedInUser["email"];
+        $_SESSION["role"] = $loggedInUser["role"]; 
         $_SESSION["successMessage"] = "Bienvenue " . $_SESSION["username"] . " !";
-        header("Location: ../index.php");
+        
+        if ($loggedInUser["role"] === "admin") {
+            header("Location: ../admin/dashboard.php"); 
+        } else {
+            header("Location: ../index.php"); 
+        }
+
         exit();
     } else {
         $error = "Email ou mot de passe incorrect.";

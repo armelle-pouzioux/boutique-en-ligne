@@ -40,7 +40,8 @@ gap: 1rem;
 }
 
 .burger-menu,
-.search-icon {
+.search-icon,
+.user-icon {
 background: none;
 border: none;
 cursor: pointer;
@@ -100,9 +101,14 @@ margin: 0.5rem 0;
     background-color: #555;
 }
 
+.user-icon, .user-menu{
+    display: none;
+}
+ 
+
 
 /* Version Desktop */
-@media (min-width: 1000px) {
+@media (min-width: 700px) {
     .burger-menu {
         display: none;
       }
@@ -130,5 +136,28 @@ margin: 0.5rem 0;
       .login-burger{
         display:flex;
     }
-    
+
+    .user-icon{
+        display: flex;
     }
+
+    .user-menu{
+        display: flex;
+        justify-content: flex-end;
+        text-align: right;
+
+        ul{
+            list-style: none;
+        }
+
+        li{
+            margin : 0.5rem 0;
+        }
+    }
+
+    .user-menu.hidden{
+        display: none;
+    }
+
+    
+}

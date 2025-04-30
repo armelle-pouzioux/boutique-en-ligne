@@ -49,18 +49,42 @@ if (isset($_GET["action"]) && $_GET["action"] === "logout") {
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: msFilter"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"></path></svg>
                 </button>
 
-                <a href="/boutique-en-ligne/views/user/login.php" aria-label="Accéder à me connecter" class="login-burger"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: msFilter"><path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"></path></svg></a>
+                <button class="user-icon" aria-label="Menu utilisateur">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"/></svg>
+                </button>
+
             </div>
         </div>
 
         <nav class="nav-menu hidden">
             <ul>
-            <li><a href="#">Accueil</a></li>
-            <li><a href="index.php?page=product&action=list">Boutique</a></li>
-            <li><a href="index.php?page=cart&action=view">Panier</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="/boutique-en-ligne/views/user/login.php" aria-label="Accéder à me connecter" class="login-nav">Se connecter</a></li>
+                <li></li>
+                <li></li>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="index.php?page=product&action=list">Boutique</a></li>
+                <li><a href="index.php?page=cart&action=view">Panier</a></li>
+                <li><a href="#">Contact</a></li>
+                <?php if (isset($_SESSION['id'])): ?>
+                <li><a href="#" class="login-nav">Mon compte</a></li>
+                <li><a href="?action=logout" class="login-nav">Se déconnecter</a></li>
+                <?php else: ?>
+                <li><a href="/boutique-en-ligne/views/user/login.php" class="login-nav">Se connecter</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
+
+        <div class="user-menu hidden">
+            <?php if (isset($_SESSION['id'])): ?>
+                <ul>
+                    <li><a href="index.php?page=user&action=profile">Mon compte</a></li>
+                    <li><a href="?action=logout">Se déconnecter</a></li>
+                </ul>
+            <?php else: ?>
+                <ul>
+                    <li><a href="/boutique-en-ligne/views/user/login.php">Se connecter</a></li>
+                    <li><a href="/boutique-en-ligne/views/user/register.php">S'inscrire</a></li>
+                </ul>
+            <?php endif; ?>
+        </div>
     </header>
 </body>
