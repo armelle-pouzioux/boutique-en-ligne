@@ -11,7 +11,7 @@ class Session
 
     public function checkUserLogin() 
     {
-        if (!isset($_SESSION["user_id"])) {
+        if (!isset($_SESSION["id"])) {
             header("Location: ../views/user/login.php");
             exit();
         }

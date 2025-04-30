@@ -13,12 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $loggedInUser = $userController->login($email, $password);
 
     if ($loggedInUser) {
-        session_start();
         $_SESSION["id"] = $loggedInUser["id"];
-        $_SESSION["name"] = $loggedInUser["name"];
+        $_SESSION["username"] = $loggedInUser["username"];
         $_SESSION["email"] = $loggedInUser["email"];
         $_SESSION["successMessage"] = "Bienvenue " . $_SESSION["username"] . " !";
-        header("Location: ../index.php");
+        // header("Location: ../login.php");
         exit();
     } else {
         $error = "Email ou mot de passe incorrect.";
@@ -28,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <main>
     <?php if (isset($_SESSION["successMessage"])) : ?>
-        <p class="message success"><?php echo $_SESSION["successMessage"] ; ?></p>
+        <p class="message-success"><?php echo $_SESSION["successMessage"] ; ?></p>
         <?php unset($_SESSION["successMessage"]); ?>
     <?php endif; ?>
 
@@ -54,12 +53,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </article>
 
             <input type="submit" value="Me connecter" class="button jump">
-
-            <a href="./register.php" class="formLink"
-            aria-label="Accéder à la création de compte">Pas encore de compte ? 
-            C'est par ici<i class="fa-solid fa-right-to-bracket fa-beat-fade"></i></i></a>
         </section>
+        <a href="./register.php" class="formLink"
+            aria-label="Accéder à la création de compte">Pas encore de compte ? 
+            <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i></i><button>C'est par ici</button></a>
     </form>
+    
 </main>
 
 <?php require_once(__DIR__ . "/../footer.php"); ?>

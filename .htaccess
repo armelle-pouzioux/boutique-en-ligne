@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /boutique-en-ligne/
 
     # Si le fichier ou le dossier existe physiquement, on le sert directement
     RewriteCond %{REQUEST_FILENAME} !-f

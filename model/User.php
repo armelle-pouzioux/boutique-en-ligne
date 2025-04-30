@@ -18,9 +18,9 @@ class User extends Database
         } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO users(name, email, password) VALUES (:name, :email, :password)";
+            $query = "INSERT INTO users(username, email, password) VALUES (:username, :email, :password)";
             $stmt = $this->getPdo()->prepare($query);
-            if ($stmt->execute([":name" => $name, ":email" => $email, ":password" => $hashedPassword])) {
+            if ($stmt->execute([":username" => $name, ":email" => $email, ":password" => $hashedPassword])) {
                 return true;
             } else {
                 $_SESSION["errorMessage"] = "Erreur lors de l'inscription.";
