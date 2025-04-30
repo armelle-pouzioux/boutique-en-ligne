@@ -1,6 +1,9 @@
 <?php
+
 require_once(__DIR__ . "/../core/Autoloader.php"); 
-require_once(__DIR__."/../model/User.php");
+require_once(__DIR__. '/../model/User.php');
+
+
 
 class UserController extends User
 {
@@ -58,41 +61,77 @@ class UserController extends User
         }  
     }
 
-    // editUser: Updates the user's username
-    public function editUser($newEmail, $newUsername, $user_id, $oldPassword, $newPassword, $newVerifiedPassword) {
-        if (!empty($nouveauMdp) || !empty($nouveauMdpVerifie)) {
-            if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
-                $_SESSION["errorMessage"] = "L'adresse email n'est pas écrite dans un format valide.";
-            }
-
-            if ($oldPassword === $newPassword) {
-                $_SESSION["errorMessage"] = "Le nouveau mot de passe doit être différent de l'ancien.";
-            }
-            
-            if (strlen($newPassword) < 8 || !preg_match("/[A-Za-z]/", $newPassword) || 
-            !preg_match("/[0-9]/", $newPassword)) {
-                $_SESSION["errorMessage"] = "Le mot de passe doit contenir au moins 8 caractères, dont au moins une 
-                lettre et un chiffre.";
-            }
-
+    public function editUser(
+        string $newEmail,
+        string $newUsername,
+        int    $user_id,
+        string $oldPassword,
+        string $newPassword,
+        string $newVerifiedPassword
+    ) {
+        // 1) Validation e-mail
+        if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
+            $_SESSION["errorMessage"] = "L'adresse email n'est pas valide.";
+            return false;
+        }
+    
+        // 2) Récupérer l'utilisateur courant (pour le password hash)
+        $userModel = new User();
+        $current = $userModel->findById($user_id);
+        if (!$current) {
+            $_SESSION["errorMessage"] = "Utilisateur introuvable.";
+            return false;
+        }
+    
+        // 3) Vérifier l'ancien mot de passe
+        if (!password_verify($oldPassword, $current['password'])) {
+            $_SESSION["errorMessage"] = "Le mot de passe actuel est incorrect.";
+            return false;
+        }
+    
+        // 4) Si on veut changer de mot de passe, le valider
+        if ($newPassword !== "" || $newVerifiedPassword !== "") {
             if ($newPassword !== $newVerifiedPassword) {
-                $_SESSION["errorMessage"] = "Les mots de passe ne correspondent pas.";
+                $_SESSION["errorMessage"] = "Les nouveaux mots de passe ne correspondent pas.";
+                return false;
             }
-        }
-
-        if (!isset($_SESSION["errorMessage"])) {
-            $user = new User;
-            $edit = $user->edit($newEmail, $newUsername, $user_id, $oldPassword, $newPassword);
-
-            if ($edit === true) {
-                $_SESSION["username"] = $newUsername;
-                $_SESSION["email"] = $newEmail;
-                $_SESSION["successMessage"] = "Votre compte a été modifié avec succès !";
-                header("Location: editUser.php");
-                exit();
-            } else {
-                $_SESSION["errorMessage"] = "Erreur lors de la modification du nom d'utilisateur.";
+            if (strlen($newPassword) < 8 
+                || !preg_match("/[A-Za-z]/", $newPassword) 
+                || !preg_match("/[0-9]/", $newPassword)) {
+                $_SESSION["errorMessage"] =
+                    "Le mot de passe doit faire ≥ 8 caractères, dont une lettre et un chiffre.";
+                return false;
             }
+            // Hash uniquement si on change
+            $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
+        } else {
+            // pas de changement = conserver l'ancien hash
+            $hashed = $current['password'];
         }
+    
+        // 5) On appelle le modèle pour la mise à jour
+        $ok = $userModel->update(
+            $user_id,
+            $newEmail,
+            $newUsername,
+            $hashed
+        );
+    
+        if ($ok) {
+            $_SESSION["username"]       = $newUsername;
+            $_SESSION["email"]          = $newEmail;
+            $_SESSION["successMessage"] = "Profil mis à jour avec succès !";
+            header("Location: /boutique-en-ligne/views/user/edit_profile.php");
+            exit;
+        } else {
+            $_SESSION["errorMessage"] = "Erreur lors de la mise à jour en base.";
+            return false;
+        }
+    }
+    
+    public function getUserById(int $user_id) {
+        // On suppose que tu as un modèle User avec une méthode findById()
+        $userModel = new User();
+        return $userModel->findById($user_id);
     }
 }

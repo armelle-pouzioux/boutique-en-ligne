@@ -7,9 +7,7 @@ $userController = new UserController;
 
 $session = new Session;
 $session->startSession();
-if (isset($_GET["action"]) && $_GET["action"] === "logout") {
-    $session->logOut();
-}
+$session->checkUserLogin();
 ?>
 
 <!DOCTYPE html>

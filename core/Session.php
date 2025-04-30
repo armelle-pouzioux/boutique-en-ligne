@@ -9,13 +9,14 @@ class Session
         }
     }
 
-    public function checkUserLogin() 
-    {
+    public function checkUserLogin() {
         if (!isset($_SESSION["id"])) {
-            header("Location: ../views/user/login.php");
+            // redirection absolue vers la page de login
+            header("Location: /boutique-en-ligne/views/user/login.php");
             exit();
         }
     }
+
 
     public function logOut()
     {

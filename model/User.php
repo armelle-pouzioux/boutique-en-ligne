@@ -7,6 +7,16 @@ class User extends Database
         parent::__construct();
     }
 
+    public function findById(int $id) {
+        $stmt = $this->pdo->prepare(
+            "SELECT id, email, username, password
+             FROM users
+             WHERE id = ?"
+        );
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }    
+
     // register: Registers a new user in the database
     public function register($username, $email, $password)
     {
