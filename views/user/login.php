@@ -16,8 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["id"] = $loggedInUser["id"];
         $_SESSION["username"] = $loggedInUser["username"];
         $_SESSION["email"] = $loggedInUser["email"];
+        $_SESSION["role"] = $loggedInUser["role"]; 
         $_SESSION["successMessage"] = "Bienvenue " . $_SESSION["username"] . " !";
-        // header("Location: ../login.php");
+        
+        if ($loggedInUser["role"] === "admin") {
+            header("Location: ../admin/dashboard.php"); 
+        } else {
+            header("Location: ../index.php"); 
+        }
+
         exit();
     } else {
         $error = "Email ou mot de passe incorrect.";
