@@ -55,7 +55,7 @@ if (isset($_GET["action"]) && $_GET["action"] === "logout") {
 
         <nav class="nav-menu hidden">
             <ul>
-            <li><a href="#">Accueil</a></li>
+            <li><a href="/boutique-en-ligne">Accueil</a></li>
             <li><a href="index.php?page=product&action=list">Boutique</a></li>
             <li><a href="index.php?page=cart&action=view">Panier</a></li>
             <li><a href="#">Contact</a></li>
