@@ -6,6 +6,8 @@ require_once(__DIR__ . "/../header.php");
 $email = $password = "";
 $error = "";
 
+$_SESSION["successMessage"] = "Bienvenue " . $_SESSION["username"] . " !";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
