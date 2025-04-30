@@ -6,7 +6,7 @@ require_once(__DIR__ . "/../header.php");
 ?>
 
 <main class="admin-dashboard">
-    <h1>Tableau de bord Admin</h1>
+    <h1>Dashboard</h1>
     
     <section class="dashboard-links">
         <a href="../product/addProduct.php" class="button">Ajouter un produit</a>
